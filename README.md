@@ -1,4 +1,4 @@
-# project url deployed to Netlify
+# Project url deployed to Netlify. Click on below url to see it in action
 
 https://reactbestsellers2021.netlify.app/
 
