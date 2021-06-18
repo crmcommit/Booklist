@@ -1,4 +1,4 @@
-import React, { Children } from 'react'
+import React from 'react'
 import ReactDom from 'react-dom'
 
 //CSS
@@ -8,40 +8,48 @@ import {data} from './books'
 // for default export specific name is not required
 import Book from'./Book'
 
+import { useState } from 'react';
+
 // Import from relative path
-import {greeting} from './testing/testing'
+//import {greeting} from './testing/testing'
 
 function BookList() {
-  console.log(greeting);
+  // state of the search
+  const [searchTerm, setSearchTerm] = useState('');
   // must return jsx
   return (
-    <div>
-      <div className="header">
-  <h1>Best Sellers 2021</h1>
-  <p>Booklist application built with React JS </p>
-</div>
-     <Search/>
-    <section className="booklist">
-      {data.map((book) => { 
-        return (
-          // spread operator to spread the object
-         <Book key={book.id} {...book}></Book>
-        );
-      })}
-    </section>
-    </div>
+      <React.Fragment>
+        <div className="header">
+          <h1>Best Sellers 2021</h1>
+          <p>Booklist application built with React JS </p>
+        </div>
+         <input autoComplete="off"  type="text" name="search" placeholder="Search by title..."
+          onChange={event =>{setSearchTerm(event.target.value)}}>
+        </input>
+        <section className="booklist">
+          {/* filter the data set by the search of title */}
+          {data.filter((val) => {
+            if(searchTerm === "") {
+              return val;  
+            }
+            // if search input includes the title
+            else if(val.title.toLowerCase().includes(searchTerm.toLowerCase())) {
+            return val;
+            }
+          }).map((val,id) => { 
+            return (
+              // spread operator to spread the object
+            <Book key={val.id} {...val}></Book>
+            );
+          })}
+        </section>
+      </React.Fragment>
   );
 }
 
 
 
-const Search = () => {
-  return (
-   <form action="">
-       <input autoComplete="off"  type="text" name="search" placeholder="Search.."></input>
-   </form>
-  );
-}
+
 
 
 

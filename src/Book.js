@@ -19,9 +19,9 @@ const Book =(props) => {
     <div>
       {/* Mouse over */}
       <article className="book" onMouseOver={() => {
-      console.log(title);
+     // console.log(title);
       }}>
-      <a href={url} target="_blank"> <img src={image}  alt={image} /></a>
+      <a href={url} target="_blank" rel="noreferrer" > <img src={image}  alt={image} /></a>
       <h1  onClick={ () => console.log(title)}>{title}</h1>
       <h4> {author}</h4>  
        <button type="button" onClick={clickHandler}>
